@@ -1,67 +1,93 @@
-// import {View} from 'react-native';
-// import Carousel from './components/Carousel.js';
-// import NavigationBar from './components/NavigationBar.js';
 
-
-
-
-// export default function App() {
-//   return (
-//       <View >
-//       <Carousel/>
-//       <NavigationBar/>
-     
-//       </View>
-//   );
-// }
-
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { View } from 'react-native';
-import Carousel from './components/Carousel.js';
-import NavigationBar from './components/NavigationBar.js';
-import HomeScreen from './Screens/Homescreen.js'; // Importing HomeScreen component
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import HomeScreen from './Screens/Homescreen';
+import SearchScreen from './Screens/Searchscreen';
+import NewAndHotScreen from './Screens/Newhot';
+import DownloadScreen from './Screens/Downloadscreen';
+import MyspaceScreen from './Screens/Myspace';
+import MovieDetailScreen from './Screens/MovieDetailScreen'; 
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-export default function App() {
+
+
+function MainTabs() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        {/* Add other screens here */}
-      </Stack.Navigator>
-      <View>
-        <Carousel />
-        <NavigationBar />
-      </View>
-    </NavigationContainer>
+    <Tab.Navigator
+    >
+      <Tab.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+          headerShown: false
+        }}
+      />
+      <Tab.Screen 
+        name="Search" 
+        component={SearchScreen} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="magnify" color={color} size={size} />
+          )
+        }}
+      />
+      <Tab.Screen 
+        name="New&Hot" 
+        component={NewAndHotScreen} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="fire" color={color} size={size} />
+          )
+        }}
+      />
+      <Tab.Screen 
+        name="Downloads" 
+        component={DownloadScreen} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="download" color={color} size={size} />
+          )
+        }}
+      />
+      <Tab.Screen 
+        name="Myspace" 
+        component={MyspaceScreen} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          )
+        }}
+      />
+    </Tab.Navigator>
   );
 }
 
-
-
-
-// import 'react-native-gesture-handler';
-// import * as React from 'react';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
-// import HomePage from './components/HomePage'; // Import your HomePage component
-// import NavigationBar from './components/NavigationBar'; // Import your NavigationBar component
-
-// const Stack = createStackNavigator();
-
-// function App() {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator initialRouteName="Home">
-//         <Stack.Screen name="Home" component={HomePage} />
-//         {/* Add other screens here if needed */}
-//       </Stack.Navigator>
-//       <NavigationBar />
-//     </NavigationContainer>
-//   );
-// }
-
-// export default App;
+export default function App() {
+  return (
+    <View style={{ flex: 1, backgroundColor: 'black' }}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen 
+            name="MainTabs" 
+            component={MainTabs} 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="MovieDetail" 
+            component={MovieDetailScreen} 
+            options={{ headerShown: false }} 
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
+  );
+}

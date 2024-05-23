@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -9,8 +7,7 @@ const MovieCard = ({ movie, onPress }) => {
     <TouchableOpacity onPress={() => onPress(movie)}>
       <View style={styles.movieCard}>
         <Image source={{ uri: movie.posterURL }} style={styles.poster} />
-        <Text>{movie.title}</Text>
-        <Text>{movie.year}</Text>
+       
       </View>
     </TouchableOpacity>
   );
@@ -53,14 +50,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 5,
     flexDirection: 'row',
-    bottom:130,
+    bottom:-100,
   },
   movieCard: {
+    
+    height:80,
     alignItems: 'center',
     marginRight: 5,
   },
   poster: {
-    width: 120,
+    width: 130,
     height: 150,
     marginBottom: 5,
   },
